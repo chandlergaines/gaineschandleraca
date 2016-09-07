@@ -1,0 +1,123 @@
+package com.chandler.android.aca.comicbooks;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.HashMap;
+
+public class MainActivity extends AppCompatActivity {
+
+    TextView mOutput;
+    EditText mTitleInput;
+    EditText mIssueInput;
+    EditText mConditionInput;
+    EditText mPriceInput;
+    Button mSubmit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mOutput = (TextView) findViewById(R.id.output);
+        mTitleInput = (EditText) findViewById(R.id.titleInput);
+        mIssueInput = (EditText) findViewById(R.id.issueInput);
+        mConditionInput = (EditText) findViewById(R.id.conditionInput);
+        mPriceInput = (EditText) findViewById(R.id.priceInput);
+        mSubmit = (Button) findViewById(R.id.button);
+
+        final String[] userStrings = new String[100];
+
+        mSubmit.setOnClickListener(new View.OnClickListener() {
+            String titleIn;
+            String issueIn;
+            String conditionIn;
+            String priceIn;
+
+
+            @Override
+            public void onClick(View view) {
+                if (mTitleInput.getText().toString() != ""){
+                    titleIn = mTitleInput.getText().toString();
+                    issueIn = mIssueInput.getText().toString();
+                    conditionIn = mConditionInput.getText().toString();
+                    priceIn = mPriceInput.getText().toString();
+                    userStrings[0] = (titleIn + ", " + issueIn + ", " + ", "
+                            + conditionIn + " " + priceIn);
+
+                }
+
+
+            }
+        });
+
+        //setup A hashmap
+        HashMap quality = new HashMap();
+
+        float price1 = 3.00F;
+        quality.put("mint", price1);
+
+        float price2 = 2.00F;
+        quality.put("near mint", price2);
+
+        float price3 = 1.50F;
+        quality.put("very fine", price3);
+
+        float price4 = 1.00F;
+        quality.put("fine", price4);
+
+        float price5 = 0.50F;
+        quality.put("good", price5);
+
+        float price6 = 0.25F;
+        quality.put("poor", price6);
+
+        //set up a collection
+        //set up an array based on our comic class
+        Comic[] comix = new Comic[3]; //Set up a comic array that will hold three comics
+
+
+        //add comics to the collection
+        comix[0] = new Comic("Amazing Spider-Man", "1A", "very fine", 12_000.00F);
+        comix[0].setPrice((Float) quality.get(comix[0].condition));
+        //in the zero slot, set method, pass in condition of very fine = 3
+        comix[1] = new Comic("The Incredible Hulk", "181", "near mint", 680.00F);
+        comix[1].setPrice((Float) quality.get(comix[1].condition));
+
+        comix[2] = new Comic("Cerebus", "1A", "good", 190.00F);
+        comix[2].setPrice((Float) quality.get(comix[2].condition));
+
+        for (int i = 0; i< comix.length; i++){
+            mOutput.append("Title: " + comix[i].title + "\n");
+            mOutput.append("Issue: " + comix[i].issueNumber + "\n");
+            mOutput.append("Condition: " + comix[i].condition + "\n");
+            mOutput.append("Price: $" + comix[i].price + "\n");
+        }
+    }
+
+    //need a class to store the comics and attributes, you should really make another class..
+    class Comic {
+        String title; //this is what holds the value we want to print
+        String issueNumber;
+        String condition;
+        float basePrice;
+        float price;
+
+        //make constructor
+        Comic (String inTitle, String inIssueNumber, String inCondition, float inBasePrice){
+            title = inTitle; //this is where the stuff we enter is held
+            issueNumber = inIssueNumber;
+            condition = inCondition;
+            basePrice = inBasePrice;
+
+        }
+
+        void setPrice(float factor){
+            price = basePrice * factor;
+        }
+    }
+}
