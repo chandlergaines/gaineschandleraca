@@ -11,12 +11,20 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    // set member variables
     TextView mOutput;
     EditText mTitleInput;
     EditText mIssueInput;
     EditText mConditionInput;
     EditText mPriceInput;
     Button mSubmit;
+
+
+
+    final HashMap quality = new HashMap();
+
+    Comic[] comix = new Comic[100]; //Set up a comic array that will hold three comics
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,33 +38,9 @@ public class MainActivity extends AppCompatActivity {
         mPriceInput = (EditText) findViewById(R.id.priceInput);
         mSubmit = (Button) findViewById(R.id.button);
 
-        final String[] userStrings = new String[100];
-
-        mSubmit.setOnClickListener(new View.OnClickListener() {
-            String titleIn;
-            String issueIn;
-            String conditionIn;
-            String priceIn;
-
-
-            @Override
-            public void onClick(View view) {
-                if (mTitleInput.getText().toString() != ""){
-                    titleIn = mTitleInput.getText().toString();
-                    issueIn = mIssueInput.getText().toString();
-                    conditionIn = mConditionInput.getText().toString();
-                    priceIn = mPriceInput.getText().toString();
-                    userStrings[0] = (titleIn + ", " + issueIn + ", " + ", "
-                            + conditionIn + " " + priceIn);
-
-                }
-
-
-            }
-        });
+        //final String[] userStrings = new String[100]; --decided I didn't need an array to hold arrays..
 
         //setup A hashmap
-        HashMap quality = new HashMap();
 
         float price1 = 3.00F;
         quality.put("mint", price1);
@@ -78,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         //set up a collection
         //set up an array based on our comic class
-        Comic[] comix = new Comic[3]; //Set up a comic array that will hold three comics
-
-
+        final Comic[] comix = new Comic[4];
         //add comics to the collection
         comix[0] = new Comic("Amazing Spider-Man", "1A", "very fine", 12_000.00F);
         comix[0].setPrice((Float) quality.get(comix[0].condition));
@@ -91,21 +73,61 @@ public class MainActivity extends AppCompatActivity {
         comix[2] = new Comic("Cerebus", "1A", "good", 190.00F);
         comix[2].setPrice((Float) quality.get(comix[2].condition));
 
-        for (int i = 0; i< comix.length; i++){
-            mOutput.append("Title: " + comix[i].title + "\n");
-            mOutput.append("Issue: " + comix[i].issueNumber + "\n");
-            mOutput.append("Condition: " + comix[i].condition + "\n");
-            mOutput.append("Price: $" + comix[i].price + "\n");
-        }
+
+
+
+        mSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String title; //this is what holds the value we want to print
+                String issue;
+                String condition;
+                float price;
+                float basePrice;
+
+                title = mTitleInput.getText().toString();
+                issue = mIssueInput.getText().toString();
+                condition = mConditionInput.getText().toString();
+                basePrice = Float.parseFloat(mPriceInput.getText().toString());
+             //   price;
+
+                comix[3] = new Comic(title, issue, condition, basePrice);
+                comix[3].setPrice((Float) quality.get(comix[3].condition));
+
+              /*  Comic newComic = new Comic(
+                        mTitleInput.getText().toString(),
+                        mIssueInput.getText().toString(),
+                        mConditionInput.getText().toString(),
+                        Float.parseFloat(mPriceInput.getText().toString()));
+              */
+
+                for (int i = 0; i < comix.length; i++){
+                    System.out.println("Title: " + comix[i].title);
+                    System.out.println("Issue: " + comix[i].issueNumber);
+                    System.out.println("Condition: " + comix[i].condition);
+                    System.out.println("Price: $" + comix[i].price);
+
+                  //  comix[i] = new Comic(title, issue, condition, basePrice);
+                  //  comix[i].setPrice((Float) quality.get(comix[i].condition));
+                    mOutput.setText(" Title: " + title + "\n Issue: " + issue + "\n Condition: " + condition + "\n Price: $");
+                    mOutput.append(String.valueOf(comix[3].price));
+                    break;
+                }
+
+            }
+        });
+
     }
 
     //need a class to store the comics and attributes, you should really make another class..
-    class Comic {
+    public class Comic {
         String title; //this is what holds the value we want to print
         String issueNumber;
         String condition;
         float basePrice;
         float price;
+
 
         //make constructor
         Comic (String inTitle, String inIssueNumber, String inCondition, float inBasePrice){
