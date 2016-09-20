@@ -12,13 +12,13 @@ public class DiceFeature {
         // Create two random generators, used .nextInt(7) because (6) would only print values up to 10
         // Using 7 seems to have solved the issue and max output so far has been 12
         Random randomGenerator = new Random();
-        int ourRandomNumber = randomGenerator.nextInt(7);
+        int ourRandomNumber = randomGenerator.nextInt(6);
 
         Random randomGenerator2 = new Random();
-        int ourRandomNumber2 = randomGenerator2.nextInt(7);
+        int ourRandomNumber2 = randomGenerator2.nextInt(6);
 
         // Concatenate random numbers and cast to string to print
-        dice = ourRandomNumber + ourRandomNumber2;
+        dice = (ourRandomNumber + ourRandomNumber2 + 2);
         diceText = Integer.toString(dice);
 
         return diceText;
