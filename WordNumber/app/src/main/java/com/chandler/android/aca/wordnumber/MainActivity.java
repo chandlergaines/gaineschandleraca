@@ -13,13 +13,6 @@ public class MainActivity extends AppCompatActivity {
     TextView mOutput;
     Button mButton;
 
-    long output;
-
-    char char1;
-    char char2;
-
-    String wordOutput;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +26,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                char1 = mInput.getText().toString().charAt(0);
-                char2 = mInput.getText().toString().charAt(1);
+                char char1 = mInput.getText().toString().toLowerCase().charAt(0);
+                char char2 = mInput.getText().toString().toLowerCase().charAt(1);
+                long output = 0;
+
+                String wordOutput;
 
                 switch(char1){
                     case 'o': //one
@@ -74,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     case 'n': //nine
                         output = 9;
                         break;
+                    default:
+                        mOutput.setText("Try again, buddy...");
 
                }
                 wordOutput = String.valueOf(output);
