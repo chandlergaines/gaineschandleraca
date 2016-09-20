@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Hangman</string>
+    <string name="action_settings">Settings</string>
+    <string name="misses_remaining">Misses Remaining:</string>
+    <string name="letters_guessed">Letters Guessed:</string>
+    <string name="guess">Guess!</string>
+</resources>
