@@ -5,8 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,17 +28,35 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Find Primes", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-            }
-        });
 
-        mPrimeFinder = new PrimeFinder(10);
+                mInput = (EditText) findViewById(R.id.input);
+                mOutput = (TextView) findViewById(R.id.output);
+                String numberIn;
 
-        mInput = (EditText) findViewById(R.id.input);
-        mOutput = (TextView) findViewById(R.id.output);
-    }
+                mPrimeFinder = new PrimeFinder(10);
+                //.parseLong().getText(mInput)
 
+                //fizz buzz paste begin
+
+                if (!mInput.getText().toString().equals("")){
+                    numberIn = mInput.getText().toString();
+                    mOutput.setMovementMethod(new ScrollingMovementMethod());
+                    mOutput.setText("");
+                    long numPrimes = Long.parseLong(numberIn); //check this by the slides from 8/30
+
+
+
+                }
+        }
+
+
+
+    })
+
+
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -62,3 +79,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+                */
+
+    ;}}
