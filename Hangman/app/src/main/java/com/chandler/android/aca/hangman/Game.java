@@ -1,10 +1,10 @@
 package com.chandler.android.aca.hangman;
 
 public class Game {
+public String mAnswer;
+public String mHits;
+public String mMisses;
 
-    private String mAnswer;
-    private String mHits;
-    private String mMisses;
     public static final int MAX_MISSES = 7;
 
     public Game (String answer) {
@@ -26,7 +26,7 @@ public class Game {
     public String getCurrentProgress(){
         String progress = "";
         for(char letter: mAnswer.toCharArray()){
-            char display = '-';
+            char display = '_';
             if(mHits.indexOf(letter)>=0){
                 display = letter;
             }
