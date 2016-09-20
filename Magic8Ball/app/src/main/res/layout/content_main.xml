@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.chandler.android.aca.magic8ball.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:background="@drawable/universe_galaxy_stars_light_68743_540x960">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/feeling_lucky"
+        android:id="@+id/titleText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/magicInfo"
+        android:layout_below="@+id/titleText"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="@string/magic_info"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diceInfo"
+        android:layout_below="@+id/magicInfo"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="@string/dice_info"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/magicText"
+        android:textColor="#aceaeb"
+        android:textStyle="bold|italic"
+        android:textSize="35dp"
+        android:textAlignment="center"
+        android:layout_marginTop="143dp"
+        android:layout_below="@+id/diceInfo"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

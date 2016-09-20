@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Magic 8 Ball</string>
+    <string name="action_settings">Settings</string>
+    <string name="feeling_lucky">Feeling Lucky?</string>
+    <string name="magic_info">Ask a question and click my face for an answer, but you may not like what I have to say!</string>
+    <string name="dice_info">Give me a shake or press the button to roll the dice!</string>
+</resources>
