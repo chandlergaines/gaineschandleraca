@@ -3,6 +3,12 @@ package com.chandler.android.aca.notetoself;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     Animation mAnimFlash;
     Animation mFadeIn;
+
+    int mIdBeep = -1;
+    SoundPool mSp;
 
     private NoteAdapter mNoteAdapter;
     private boolean mSound;
@@ -37,34 +47,63 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Instantiate our sound pool
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
+
+            mSp = new SoundPool.Builder()
+                    .setMaxStreams(5)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        }else{
+            mSp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        }
+
+        try{
+            // Create objects of the 2 required classes
+            AssetManager assetManager = this.getAssets();
+            AssetFileDescriptor descriptor;
+
+            // Load our fx in memory ready for use
+            descriptor = assetManager.openFd("beep.ogg");
+            mIdBeep = mSp.load(descriptor, 0);
+
+        }catch(IOException e){
+            // Print an error message to the console
+            Log.e("error", "failed to load sound files");
+        }
+
         mNoteAdapter = new NoteAdapter();
         ListView listNote = (ListView)findViewById(R.id.listView);
         listNote.setAdapter(mNoteAdapter); // this binds them together
 
+        // So we can long click it
+        listNote.setLongClickable(true);
 
-        /* We used this in setup and were told to delete it when improving the functionality
-        // Temporary code
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // Now to detect long clicks and delete the note
+        listNote.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-                // Create a new DialogShowNote called dialog
-                DialogShowNote dialog = new DialogShowNote();
+            public boolean onItemLongClick(AdapterView<?> adapter, View view,
+                                           int whichItem, long id) {
 
-                // Send the note via the sendNoteSelected method
-                dialog.sendNoteSelected(mTempNote);
+                // Ask NoteAdapter to delete this entry
+                mNoteAdapter.deleteNote(whichItem);
 
-                // Create the dialog
-                dialog.show(getFragmentManager(), "123");
+                return true;
             }
         });
-        */
 
         // Handle the clicks on the ListView
         listNote.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int whichITem, long id){
+
+                if(mSound){
+                    mSp.play(mIdBeep, 1, 1, 0, 0, 1);
+                }
 
                 /*
                 Create a temp note
@@ -252,7 +291,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Error Saving Notes", "", e);
             }
         }
-    }
+
+        public void deleteNote(int n){
+            noteList.remove(n);
+            notifyDataSetChanged();
+        }
+
+    } // End note adapter class
 
 
 }
