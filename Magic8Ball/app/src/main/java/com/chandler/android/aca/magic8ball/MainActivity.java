@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private DiceFeature mDiceFeature = new DiceFeature();
     String magic;
     String diceText;
-    private final static float ACC = 20;
-    SensorManager shakeTheDevice;
+    private final static float ACC = 15; // Sensitivity to alter
+    // How to differentiate on different devices???
+    SensorManager mSensorManager;
 
     TextView mMagicTextView;
 
@@ -53,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             }
         });
 
-        shakeTheDevice = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        shakeTheDevice.registerListener(this,
-                shakeTheDevice.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorManager.registerListener(this,
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
 
@@ -66,11 +67,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(sensor.getType() == Sensor.TYPE_ACCELEROMETER){
             diceText = mDiceFeature.getDice();
             mMagicTextView.setText(diceText);
-        }*/
+        }
+         This was removed because it provided an endless loop of numbers which was terrifying
+        */
 
        float[] values = event.values;
         if ((Math.abs(values[0]) > ACC || Math.abs(values[1]) > ACC || Math
-                .abs(values[2]) > ACC)) {
+                .abs(values[2]) > ACC)) { // X, Y, Z axis to measure location and force on those axes
             diceText = mDiceFeature.getDice();
             mMagicTextView.setText(diceText);
 
@@ -111,19 +114,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     protected void onPause() {
-        shakeTheDevice.unregisterListener(this);
+        mSensorManager.unregisterListener(this);
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        shakeTheDevice.unregisterListener(this);
+        mSensorManager.unregisterListener(this);
         super.onStop();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        shakeTheDevice.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 }
