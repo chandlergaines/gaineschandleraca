@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent" android:layout_height="match_parent"
     android:padding="10dp">
 
     <EditText
@@ -10,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="0dp"
         android:hint="@string/title_hint" />
 
     <EditText
@@ -20,7 +22,7 @@
         android:layout_below="@+id/editTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:hint="@string/description_hint"
         android:inputType="textMultiLine" />
 
@@ -32,7 +34,7 @@
         android:layout_below="@+id/editDescription"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:checked="false" />
 
     <CheckBox
@@ -43,7 +45,7 @@
         android:layout_below="@+id/checkBoxIdea"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:checked="false" />
 
     <CheckBox
@@ -54,7 +56,7 @@
         android:layout_below="@+id/checkBoxTodo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="10dp"
         android:checked="false" />
 
     <Button
@@ -65,7 +67,7 @@
         android:layout_below="@+id/checkBoxImportant"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="220dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -75,4 +77,21 @@
         android:layout_alignTop="@+id/btnCancel"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnCancel"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnAddPhoto"
+        android:text="@string/add_photo"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/checkBoxImportant"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:id="@+id/photoImageView"/>
+
 </RelativeLayout>

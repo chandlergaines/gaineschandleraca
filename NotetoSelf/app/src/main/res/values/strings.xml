@@ -16,6 +16,7 @@
     <string name="rb_fast">Fast</string>
     <string name="rb_slow">Slow</string>
     <string name="rb_none">None</string>
+    <string name="add_photo">Add Photo</string>
 
     <string name="action_settings">Settings</string>
 </resources>

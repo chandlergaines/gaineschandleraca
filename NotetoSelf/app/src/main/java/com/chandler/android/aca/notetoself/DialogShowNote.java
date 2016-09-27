@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 public class DialogShowNote extends DialogFragment {
 
+/*    Uri photoUri;
+    String stringUri;*/
+
+
     private Note mNote;
 
     @Override
@@ -31,9 +35,24 @@ public class DialogShowNote extends DialogFragment {
         txtTitle.setText(mNote.getTitle());
         txtDescription.setText(mNote.getDescription());
 
+        ImageView ivPhoto = (ImageView) dialogView.findViewById(R.id.photoImageView);
+
+
+/*        //Not done with this chunk of code
+        stringUri = uri.toString("photo");
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey("photo")){
+            Uri = extras.getString("photo");
+        }
+        //Not done with this chunk of code*/
+
+
         ImageView ivImportant = (ImageView) dialogView.findViewById(R.id.imageViewImportant);
         ImageView ivTodo = (ImageView) dialogView.findViewById(R.id.imageViewTodo);
         ImageView ivIdea = (ImageView) dialogView.findViewById(R.id.imageViewIdea);
+
+
 
         if (!mNote.isImportant()){
             ivImportant.setVisibility(View.GONE);
@@ -59,8 +78,6 @@ public class DialogShowNote extends DialogFragment {
         });
 
         return builder.create();
-
-
 
     }
 
