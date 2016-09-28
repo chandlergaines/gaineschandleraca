@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//Bitmap is a file structure like jpeg
+//Uri is the file location
+
 public class CaptureFragment extends Fragment{
 
     private static final int CAMERA_REQUEST = 123;
@@ -67,7 +70,7 @@ public class CaptureFragment extends Fragment{
                 try{
                     photoFile = createImageFile();
                 } catch (IOException ex){
-                    //Error occured while creating the file
+                    //Error occurred while creating the file
                     Log.e("error", "error creating file");
                 }
                 //Continue only if the file was successfully created
