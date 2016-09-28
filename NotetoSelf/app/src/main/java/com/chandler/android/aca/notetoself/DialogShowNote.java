@@ -1,9 +1,9 @@
 package com.chandler.android.aca.notetoself;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +12,9 @@ import android.widget.TextView;
 
 public class DialogShowNote extends DialogFragment {
 
-/*    Uri photoUri;
-    String stringUri;*/
-
-
     private Note mNote;
+
+    private ImageView mImageView;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -35,9 +33,6 @@ public class DialogShowNote extends DialogFragment {
         txtTitle.setText(mNote.getTitle());
         txtDescription.setText(mNote.getDescription());
 
-        ImageView ivPhoto = (ImageView) dialogView.findViewById(R.id.photoImageView);
-
-
 /*        //Not done with this chunk of code
         stringUri = uri.toString("photo");
 
@@ -52,6 +47,8 @@ public class DialogShowNote extends DialogFragment {
         ImageView ivTodo = (ImageView) dialogView.findViewById(R.id.imageViewTodo);
         ImageView ivIdea = (ImageView) dialogView.findViewById(R.id.imageViewIdea);
 
+        ImageView mImageView = (ImageView) dialogView.findViewById(R.id.photoImageView);
+        mImageView.setImageURI(mNote.getImage());
 
 
         if (!mNote.isImportant()){
@@ -65,6 +62,9 @@ public class DialogShowNote extends DialogFragment {
         if (!mNote.isIdea()){
             ivIdea.setVisibility(View.GONE);
         }
+
+        /*ImageView mImageView = (ImageView) dialogView.findViewById(photoImageView);
+        mImageView.setImageURI(mNote.getImage());*/
 
         Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
 

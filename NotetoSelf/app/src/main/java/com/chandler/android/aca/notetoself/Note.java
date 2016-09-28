@@ -1,5 +1,7 @@
 package com.chandler.android.aca.notetoself;
 
+import android.net.Uri;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,14 +12,16 @@ public class Note {
     private boolean mIdea;
     private boolean mTodo;
     private boolean mImportant;
-    private String mImage;
+    private Uri mImage;
+
+
 
     private static final String JSON_TITLE = "title";
     private static final String JSON_DESCRIPTION = "description";
     private static final String JSON_IDEA = "idea";
     private static final String JSON_TODO = "todo";
     private static final String JSON_IMPORTANT = "important";
-    private static final String JSON_IMAGE = "image";
+   // private static final String JSON_IMAGE = "image";
     // "m" designates a member variable (slash class variable)
 
     // At some point you should set maximum lengths and
@@ -34,13 +38,21 @@ public class Note {
         mIdea = jo.getBoolean(JSON_IDEA);
         mTodo = jo.getBoolean(JSON_TODO);
         mImportant = jo.getBoolean(JSON_IMPORTANT);
-        mImage = jo.getString(JSON_IMAGE);
+       // mImage = jo.getString(JSON_IMAGE);
     }
     // Now we must provide an empty default constructor
     // for when we create a Note as we provide a
     // specialized constructor that must be used.
     public Note (){
 
+    }
+
+    public Uri getImage() {
+        return mImage;
+    }
+
+    public void setImage(Uri image) {
+        mImage = image;
     }
 
     public String getTitle() {
@@ -83,13 +95,7 @@ public class Note {
         mImportant = important;
     }
 
-    public String getImage() {
-        return mImage;
-    }
 
-    public void setImage(String image) {
-        mImage = image;
-    }
 
     public JSONObject convertToJSON() throws JSONException{
 
@@ -100,7 +106,6 @@ public class Note {
         jo.put(JSON_IDEA, mIdea);
         jo.put(JSON_TODO, mTodo);
         jo.put(JSON_IMPORTANT, mImportant);
-        jo.put(JSON_IMAGE, mImage);
 
         return jo;
     }

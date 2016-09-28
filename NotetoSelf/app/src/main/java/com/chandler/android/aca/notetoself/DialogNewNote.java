@@ -1,6 +1,7 @@
 package com.chandler.android.aca.notetoself;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -9,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +27,17 @@ public class DialogNewNote extends DialogFragment {
 
     private static final int CAMERA_REQUEST = 123;
     private ImageView mImageView;
+    private Button mAddPhoto;
 
     // The filepath for the photo
     public String mCurrentPhotoPath; // set to hold image.absolutepath
-
     //Where the captured image is stored
     public Uri mImageUri = Uri.EMPTY;
 
-    public String photoUri;
+    // Create a new note
+    Note newNote = new Note();
+
+
 
 /*    //Weird stuff to try
     String stringUri;*/
@@ -56,7 +59,8 @@ public class DialogNewNote extends DialogFragment {
         final CheckBox checkBoxImportant = (CheckBox) dialogView.findViewById(R.id.checkBoxImportant);
         Button btnCancel = (Button) dialogView.findViewById(R.id.btnCancel);
         Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
-        Button btnAddPhoto = (Button) dialogView.findViewById(R.id.btnAddPhoto);
+
+        mAddPhoto = (Button) dialogView.findViewById(R.id.btnAddPhoto);
         mImageView = (ImageView) dialogView.findViewById(R.id.photoImageView);
 
         builder.setView(dialogView).setMessage("Add a new note");
@@ -74,8 +78,6 @@ public class DialogNewNote extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                // Create a new note
-                Note newNote = new Note();
 
                 // Set its variables to match the users' entries on the form
                 newNote.setTitle(editTitle.getText().toString());
@@ -96,7 +98,7 @@ public class DialogNewNote extends DialogFragment {
 
         });
 
-        btnAddPhoto.setOnClickListener(new View.OnClickListener(){
+        mAddPhoto.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -132,9 +134,8 @@ public class DialogNewNote extends DialogFragment {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
 
             try {
-
+                newNote.setImage(Uri.parse(mImageUri.toString()));
                 mImageView.setImageURI(Uri.parse(mImageUri.toString()));
-                photoUri = mImageUri.toString();
 
                 //This is important and needs to go along to ShowNote
 
