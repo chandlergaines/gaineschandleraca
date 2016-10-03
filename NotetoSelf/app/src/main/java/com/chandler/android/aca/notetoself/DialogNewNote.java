@@ -29,18 +29,17 @@ public class DialogNewNote extends DialogFragment {
     private ImageView mImageView;
     private Button mAddPhoto;
 
+
+    public String mCurrentPhotoPath;
     // The filepath for the photo
-    public String mCurrentPhotoPath; // set to hold image.absolutepath
+    // set to hold image.absolutepath
     //Where the captured image is stored
+
     public Uri mImageUri = Uri.EMPTY;
+    public String mImageString;
 
     // Create a new note
     Note newNote = new Note();
-
-
-
-/*    //Weird stuff to try
-    String stringUri;*/
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -85,6 +84,9 @@ public class DialogNewNote extends DialogFragment {
                 newNote.setIdea(checkBoxIdea.isChecked());
                 newNote.setTodo(checkBoxTodo.isChecked());
                 newNote.setImportant(checkBoxImportant.isChecked());
+
+                if (mImageUri != null){
+                newNote.setImageString(mImageString);}
 
                 // Get a reference to MainActivity
                 MainActivity callingActivity = (MainActivity) getActivity();
@@ -133,8 +135,9 @@ public class DialogNewNote extends DialogFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
 
+
             try {
-                newNote.setImage(Uri.parse(mImageUri.toString()));
+                newNote.setImageUri(Uri.parse(mImageUri.toString()));
                 mImageView.setImageURI(Uri.parse(mImageUri.toString()));
 
                 //This is important and needs to go along to ShowNote
@@ -152,10 +155,11 @@ public class DialogNewNote extends DialogFragment {
     public void onDestroy() {
         super.onDestroy();
 
+        if (mImageUri != null){
         // Make sure we don't run out of memory
         BitmapDrawable bd = (BitmapDrawable) mImageView.getDrawable();
         bd.getBitmap().recycle();
-        mImageView.setImageBitmap(null);
+        mImageView.setImageBitmap(null);}
     }
 
     private File createImageFile() throws IOException {
@@ -174,12 +178,6 @@ public class DialogNewNote extends DialogFragment {
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
         return image;
     }
-/*
-    //Weird stuff
-    Intent passPhoto = new Intent(Intent.ACTION_VIEW);
-    passPhoto.setClass(DialogNewNote.this, DialogShowNote.class);
-    passPhoto.putExtra("photo", Uri);
-    //Weird stuff*/
 
 }
 

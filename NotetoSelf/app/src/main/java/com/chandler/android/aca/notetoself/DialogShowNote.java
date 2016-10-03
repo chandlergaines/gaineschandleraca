@@ -3,6 +3,7 @@ package com.chandler.android.aca.notetoself;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,8 +78,32 @@ public class DialogShowNote extends DialogFragment {
             }
         });
 
+        Button btnSend = (Button) dialogView.findViewById(R.id.btnSend);
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shareIt();
+            }
+        });
+
+
         return builder.create();
 
+    }
+
+    private void shareIt(){
+        //Android provided sending intent
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+
+        //What gets shared added in here
+
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mNote.getTitle());
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, "Note: " + mNote.getTitle() + "\n \n" + "Description: "+ mNote.getDescription());
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, mNote.getImage());
+
+        //Start the share
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
 

@@ -12,16 +12,15 @@ public class Note {
     private boolean mIdea;
     private boolean mTodo;
     private boolean mImportant;
-    private Uri mImage;
-
-
+    private Uri mImageUri;
+    private String mImageString;
 
     private static final String JSON_TITLE = "title";
     private static final String JSON_DESCRIPTION = "description";
     private static final String JSON_IDEA = "idea";
     private static final String JSON_TODO = "todo";
     private static final String JSON_IMPORTANT = "important";
-   // private static final String JSON_IMAGE = "image";
+    private static final String JSON_IMAGE = "image";
     // "m" designates a member variable (slash class variable)
 
     // At some point you should set maximum lengths and
@@ -38,7 +37,8 @@ public class Note {
         mIdea = jo.getBoolean(JSON_IDEA);
         mTodo = jo.getBoolean(JSON_TODO);
         mImportant = jo.getBoolean(JSON_IMPORTANT);
-       // mImage = jo.getString(JSON_IMAGE);
+        mImageUri = Uri.parse(jo.getString(JSON_IMAGE));
+        //todo fix the no photo crash
     }
     // Now we must provide an empty default constructor
     // for when we create a Note as we provide a
@@ -48,11 +48,11 @@ public class Note {
     }
 
     public Uri getImage() {
-        return mImage;
+        return mImageUri;
     }
 
-    public void setImage(Uri image) {
-        mImage = image;
+    public void setImageUri(Uri image) {
+        mImageUri = image;
     }
 
     public String getTitle() {
@@ -95,6 +95,19 @@ public class Note {
         mImportant = important;
     }
 
+    public Uri getImageUri() {
+        return mImageUri;
+    }
+
+    public String getImageString() {
+        return mImageString;
+    }
+
+    public void setImageString(String imageString) {
+        mImageString = imageString;
+    }
+
+
 
 
     public JSONObject convertToJSON() throws JSONException{
@@ -106,6 +119,8 @@ public class Note {
         jo.put(JSON_IDEA, mIdea);
         jo.put(JSON_TODO, mTodo);
         jo.put(JSON_IMPORTANT, mImportant);
+        jo.put(JSON_IMAGE, mImageUri.toString());
+        //if (mImageUri != null) {jo.put(JSON_IMAGE, mImageUri);}
 
         return jo;
     }

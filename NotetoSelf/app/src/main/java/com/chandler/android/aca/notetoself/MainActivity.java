@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private NoteAdapter mNoteAdapter;
     private boolean mSound;
     private int mAnimOption;
+    private int mBackground;
     private SharedPreferences mPrefs;
 
     @Override
@@ -141,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
         mPrefs = getSharedPreferences("Note to self", MODE_PRIVATE);
         mSound = mPrefs.getBoolean("sound", true);
         mAnimOption = mPrefs.getInt("anim option", SettingsActivity.FAST);
+       // mBackground = mPrefs.getInt("bkg option", SettingsActivity.COLORS);
+
 
         mAnimFlash = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.flash);
         mFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
@@ -155,6 +158,9 @@ public class MainActivity extends AppCompatActivity {
             Log.i("anim = ",""+ mAnimOption);
             mAnimFlash.setDuration(1000);
         }
+
+       // if(mBackground == SettingsActivity.COLORS){
+       // }
 
         mNoteAdapter.notifyDataSetChanged();
     }

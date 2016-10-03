@@ -46,7 +46,7 @@
         android:layout_below="@+id/checkBoxSound"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="49dp"/>
+        android:layout_marginTop="50dp"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
@@ -76,5 +76,45 @@
             android:text="@string/rb_none"
             android:id="@+id/radioNone"
             android:checked="false"/>
+    </RadioGroup>
+
+    <TextView
+        android:text="Background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/textView4"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/bkgRadio">
+
+        <RadioButton
+            android:text="RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bkg1"
+            android:layout_weight="1"/>
+
+        <RadioButton
+            android:text="RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bkg2"
+            android:layout_weight="1"/>
+
+        <RadioButton
+            android:text="RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bkg3"
+            android:layout_weight="1"/>
     </RadioGroup>
 </RelativeLayout>
