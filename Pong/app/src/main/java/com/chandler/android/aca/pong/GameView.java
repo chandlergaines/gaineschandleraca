@@ -1,6 +1,7 @@
 package com.chandler.android.aca.pong;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Canvas;
@@ -15,13 +16,18 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
 import java.io.IOException;
 
 // Notice we implement runnable so we have
 // A thread and can override the run method.
 
-class GameView extends SurfaceView implements Runnable{
+public class GameView extends SurfaceView implements Runnable{
+
+        TextView mYouLose;
+
+        Context mContext;
 
         // This is our thread
         Thread mGameThread = null;
@@ -83,6 +89,8 @@ class GameView extends SurfaceView implements Runnable{
 
         super(context);
 
+        mContext = context;
+
         // Set the screen width and height
         mScreenX = x;
         mScreenY = y;
@@ -96,6 +104,8 @@ class GameView extends SurfaceView implements Runnable{
 
         // Create a mBall
         mBall = new Ball(mScreenX, mScreenY);
+
+        mYouLose = (TextView)findViewById(R.id.textView);
 
         /*
         Instantiate our sound pool
@@ -144,19 +154,26 @@ class GameView extends SurfaceView implements Runnable{
         }
 
         setupAndRestart();
-
     }
 
     public void setupAndRestart(){
+
+        Intent youLost = new Intent(mContext, GameOver.class);
 
         // Put the mBall back to the start
         mBall.reset(mScreenX, mScreenY);
 
         // if game over reset scores and mLives
         if(mLives == 0) {
+
+            mContext.startActivity(youLost);
+
             mScore = 0;
             mLives = 3;
         }
+
+
+        // Intent gameOver = new Intent(get, MainActivity.class);
 
     }
 

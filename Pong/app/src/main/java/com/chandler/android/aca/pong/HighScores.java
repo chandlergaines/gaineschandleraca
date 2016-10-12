@@ -1,4 +1,8 @@
 package com.chandler.android.aca.pong;
 
-public class HighScores {
+import android.app.Activity;
+
+public class HighScores extends Activity {
+
+
 }

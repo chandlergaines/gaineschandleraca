@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Pong</string>
-    <string name="you_lose">You Lose!\n</string>
-    <string name="play_again">Play Again?</string>
+    <string name="you_lose">You Lose!</string>
+    <string name="play_again">PLAY AGAIN?</string>
     <string name="play">PLAY</string>
+    <string name="hello_pong">Hello Pong!</string>
+    <string name="high_scores">WINNERS CIRCLE</string>
+    <string name="memes">CONSOLATION MEMES</string>
 </resources>

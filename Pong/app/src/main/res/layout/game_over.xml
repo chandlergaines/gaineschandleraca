@@ -1,7 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/pongBackground">
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:text="@string/you_lose"
+        android:textColor="@color/pongAccent"
+        android:id="@+id/textView"
+        android:textSize="40sp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:text="@string/play_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btnPlay"
+        android:background="@android:drawable/btn_default"
+        android:textColor="@color/pongBackground"
+        android:backgroundTint="@color/pongAccent"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/btnHighScores"
+        android:text="@string/high_scores"
+        android:textColor="@color/pongBackground"
+        android:backgroundTint="@color/pongAccent"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnHighScores"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        android:id="@+id/btnMemes"
+        android:text="@string/memes"
+        android:textColor="@color/pongBackground"
+        android:backgroundTint="@color/pongAccent"/>
+
+
+</RelativeLayout>

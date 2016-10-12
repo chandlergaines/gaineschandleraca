@@ -1,4 +1,6 @@
 package com.chandler.android.aca.pong;
 
-public class Memes {
+import android.app.Activity;
+
+public class Memes extends Activity {
 }
