@@ -60,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         CheckBox checkBoxSound = (CheckBox)findViewById(R.id.checkBoxSound);
 
-        mRelativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
+       // mRelativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
 
         if(mSound){
             checkBoxSound.setChecked(true);

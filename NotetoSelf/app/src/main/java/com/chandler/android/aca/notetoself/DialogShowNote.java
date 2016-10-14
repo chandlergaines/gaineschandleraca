@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.chandler.android.aca.notetoself.R.id.imageView;
+
 public class DialogShowNote extends DialogFragment {
 
     private Note mNote;
@@ -48,7 +50,7 @@ public class DialogShowNote extends DialogFragment {
         ImageView ivTodo = (ImageView) dialogView.findViewById(R.id.imageViewTodo);
         ImageView ivIdea = (ImageView) dialogView.findViewById(R.id.imageViewIdea);
 
-        ImageView mImageView = (ImageView) dialogView.findViewById(R.id.photoImageView);
+        ImageView mImageView = (ImageView) dialogView.findViewById(imageView);
         mImageView.setImageURI(mNote.getImage());
 
 
@@ -64,7 +66,7 @@ public class DialogShowNote extends DialogFragment {
             ivIdea.setVisibility(View.GONE);
         }
 
-        /*ImageView mImageView = (ImageView) dialogView.findViewById(photoImageView);
+        /*ImageView mImageView = (ImageView) dialogView.findViewById(R.id.photoImageView);
         mImageView.setImageURI(mNote.getImage());*/
 
         Button btnOK = (Button) dialogView.findViewById(R.id.btnOK);
