@@ -1,5 +1,6 @@
 package com.chandler.android.aca.filmsearch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,8 +23,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView; //get a reference
     private MoviesAdapter mAdapter;
+    private Movie mMovie; //added this for the lab assgn
 
 
     @Override
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView); //link the reference to the view
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,20 +46,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2)); //two side by side
         mAdapter = new MoviesAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
-        List<Movie> movies = new ArrayList<>();
+        final List<Movie> movies = new ArrayList<>();
 
         for (int i = 0; i < 26; i++) {
             movies.add(new Movie());
         }
         mAdapter.setMovieList(movies);
-
-
+        //allow the adapter and the recyclerview to communicate
 
         myRetrofit();
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerOnClick(getApplicationContext(),
+                mRecyclerView, new RecyclerOnClick.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(View v, int position) {
+
+                    int itemPosition = mRecyclerView.getChildLayoutPosition(v);
+                    mAdapter.getMovieList();
+                    Movie selected = movies.get(itemPosition);
+
+                    final String mBackdrop = selected.getBackdrop();
+                    final String mTitle = selected.getMovieTitle();
+                    final String mDescription = selected.getDescription();
+
+                    /*final String mBackdrop = mMovie.getBackdrop();
+                    final String mTitle = mMovie.getTitle();
+                    final String mDescription = mMovie.getDescription();*/
+
+                    Intent intent = new Intent(getApplicationContext(), MovieDetails.class);
+                    intent.putExtra("Movie", mAdapter.getMovieList().get(position)); //pass the whole damn movie
+
+                    /*Intent intent = new Intent(MainActivity.this, MovieDetails.class);
+                    intent.putExtra("BACK", mBackdrop);
+                    intent.putExtra("TITLE", mTitle);
+                    intent.putExtra("DESC", mDescription);*/
+
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onLongItemClick(View view, int position) {
+
+                }
+
+            })
+        );
     }
 
     @Override
@@ -83,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void myRetrofit(){
-        Retrofit restAdapter = new Retrofit.Builder()
+        Retrofit restAdapter = new Retrofit.Builder() //create a retrofit object (rest adapter)
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("http://api.themoviedb.org/")
                 .build();
@@ -102,6 +139,39 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+
     }
 
 }
+
+
+       /* mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+                int itemPosition = mRecyclerView.getChildLayoutPosition(rv);
+                mAdapter.getMovieList();
+                Movie selected = movies.get(itemPosition);
+
+                final String mBackdrop = mMovie.getBackdrop();
+                final String mTitle = mMovie.getTitle();
+                final String mDescription = mMovie.getDescription();
+
+                Intent intent = new Intent(MainActivity.this, MovieDetails.class);
+                intent.putExtra("BACK", mBackdrop);
+                intent.putExtra("TITLE", mTitle);
+                intent.putExtra("DESC", mDescription);
+
+                startActivity(intent);
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }*/
+
+

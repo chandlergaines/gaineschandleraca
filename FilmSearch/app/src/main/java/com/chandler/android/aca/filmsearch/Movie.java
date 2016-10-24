@@ -2,27 +2,34 @@ package com.chandler.android.aca.filmsearch;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Movie {
+public class Movie implements Serializable { //this represents a single movie
+    //implements serializable
+
     public static final String TMDB_IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
     //picasso needs the full url of the image so we add this bit in so when we get the url of the
     //image we only get the unique bit for each image, we need the full thing, so we hardcode this in
 
+    @SerializedName("title")
     private String mTitle;
 
     @SerializedName("poster_path") //this is to tell the Gson which JSON matches this field
     private String mPoster;
 
-    @SerializedName("overview") //this address for this image will be matched up with this JSON object
+    @SerializedName("overview")
+    //this address for this image will be matched up with this JSON object
     private String mDescription;
 
     @SerializedName("backdrop_path") //serialized name allows us to name our object whatever we want
     private String mBackdrop;
 
-    public Movie() {}
+    public Movie() {
+    }
 
-    public String getTitle() {
+
+    public String getMovieTitle() {
         return mTitle;
     }
 
@@ -47,12 +54,13 @@ public class Movie {
     }
 
     public String getBackdrop() {
-        return TMDB_IMAGE_PATH  + mBackdrop;
+        return TMDB_IMAGE_PATH + mBackdrop;
     }
 
     public void setBackdrop(String backdrop) {
         mBackdrop = backdrop;
     }
+
 
     public static class MovieResult {
         private List<Movie> results;
