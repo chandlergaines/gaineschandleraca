@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     final String mDescription = mMovie.getDescription();*/
 
                     Intent intent = new Intent(getApplicationContext(), MovieDetails.class);
-                    intent.putExtra("Movie", mAdapter.getMovieList().get(position));
+                    intent.putExtra("Movie", mAdapter.getMovieList().get(position)); //pass the whole damn movie
 
                     /*Intent intent = new Intent(MainActivity.this, MovieDetails.class);
                     intent.putExtra("BACK", mBackdrop);
@@ -175,43 +175,3 @@ public class MainActivity extends AppCompatActivity {
             }*/
 
 
-      /*  new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                int itemPosition = mRecyclerView.getChildLayoutPosition(v);
-                mAdapter.getMovieList();
-                Movie selected = movies.get(itemPosition);
-
-                final String mBackdrop = mMovie.getBackdrop();
-                final String mTitle = mMovie.getTitle();
-                final String mDescription = mMovie.getDescription();
-
-                Intent intent = new Intent(MainActivity.this, MovieDetails.class);
-                intent.putExtra("BACK", mBackdrop);
-                intent.putExtra("TITLE", mTitle);
-                intent.putExtra("DESC", mDescription);
-
-                startActivity(intent);
-            }
-        };*/
-
-   /* public final View.OnClickListener ClickityClack = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int itemPosition = mRecyclerView.getChildLayoutPosition(v);
-            Movie item = movies.get(itemPosition);
-
-            mAdapter.getMovieList();
-
-            final String mBackdrop = mMovie.getBackdrop();
-            final String mTitle = mMovie.getTitle();
-            final String mDescription = mMovie.getDescription();
-
-            Intent intent = new Intent(MainActivity.this, MovieDetails.class);
-            intent.putExtra("BACK", mBackdrop);
-            intent.putExtra("TITLE", mTitle);
-            intent.putExtra("DESC", mDescription);
-
-            startActivity(intent);
-        }
-    };*/

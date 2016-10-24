@@ -19,7 +19,7 @@ public class MovieDetails extends AppCompatActivity {
     private Button mBackButton;
 
     private MoviesAdapter mAdapter;
-    Movie movie = new Movie();
+    Movie movie = new Movie(); //create an instance of movie to use later
     Context mContext;
 
     @Override
@@ -70,9 +70,9 @@ public class MovieDetails extends AppCompatActivity {
         }*/
 
         Intent intent = getIntent();
-        intent.getSerializableExtra("Movie");
+        intent.getSerializableExtra("Movie"); //getting the intent extras from MA
 
-        Movie movie = (Movie) intent.getSerializableExtra("Movie");
+        Movie movie = (Movie) intent.getSerializableExtra("Movie"); // setting THIS movie to the bundle of extras
 
         mMovieTitle.setText(movie.getMovieTitle());
         mMovieDescription.setText(movie.getDescription());
